@@ -1,0 +1,104 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg-primary: #0a0a0f;
+  --bg-secondary: #12121a;
+  --bg-card: #1a1a2e;
+  --text-primary: #e0d6cc;
+  --text-secondary: #8a8a9a;
+  --accent-red: #dc3545;
+  --accent-purple: #7c3aed;
+}
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: 'Crimson Text', Georgia, serif;
+}
+
+/* 暗黑火焰背景 */
+.bg-dark-pattern {
+  background-image:
+    radial-gradient(ellipse at 20% 50%, rgba(124, 58, 237, 0.08) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 50%, rgba(220, 53, 69, 0.08) 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 0%, rgba(124, 58, 237, 0.05) 0%, transparent 40%);
+  background-color: var(--bg-primary);
+}
+
+/* 卡片样式 */
+.card-curse {
+  background: linear-gradient(145deg, #1a1a2e, #16162a);
+  border: 1px solid rgba(124, 58, 237, 0.2);
+  transition: all 0.3s ease;
+}
+
+.card-curse:hover {
+  border-color: rgba(220, 53, 69, 0.5);
+  box-shadow: 0 0 20px rgba(220, 53, 69, 0.1), 0 0 40px rgba(124, 58, 237, 0.05);
+}
+
+/* 滚动条 */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-primary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(124, 58, 237, 0.3);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(124, 58, 237, 0.5);
+}
+
+/* 输入框发光效果 */
+.input-glow:focus {
+  box-shadow: 0 0 0 2px rgba(124, 58, 237, 0.3), 0 0 15px rgba(124, 58, 237, 0.1);
+}
+
+/* 排行榜数字 */
+.rank-number {
+  font-family: 'Cinzel', serif;
+  font-weight: 900;
+}
+
+/* 火焰文字效果 */
+.text-fire {
+  background: linear-gradient(180deg, #ff6b35, #dc3545, #7c3aed);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* 按钮脉冲 */
+.btn-pulse:hover {
+  animation: pulse-red 2s infinite;
+}
+
+@keyframes pulse-red {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(220, 53, 69, 0.4); }
+  50% { box-shadow: 0 0 0 10px rgba(220, 53, 69, 0); }
+}
+
+/* 骷髅装饰 */
+.skull-divider {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.skull-divider::before,
+.skull-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(124, 58, 237, 0.3), transparent);
+}
