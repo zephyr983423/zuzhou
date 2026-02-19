@@ -61,9 +61,9 @@ const neonStore = {
       FROM curses ORDER BY created_at DESC LIMIT ${limit}
     `;
     return rows.map((r) => ({
-      id: r.id as string,
-      targetName: r.target_name as string,
-      curseText: r.curse_text as string,
+      id: String(r.id),
+      targetName: String(r.target_name),
+      curseText: String(r.curse_text),
       createdAt: Number(r.created_at),
     }));
   },
@@ -76,9 +76,9 @@ const neonStore = {
       ORDER BY created_at DESC
     `;
     return rows.map((r) => ({
-      id: r.id as string,
-      targetName: r.target_name as string,
-      curseText: r.curse_text as string,
+      id: String(r.id),
+      targetName: String(r.target_name),
+      curseText: String(r.curse_text),
       createdAt: Number(r.created_at),
     }));
   },
@@ -86,15 +86,18 @@ const neonStore = {
     await ensureTable();
     const sql = getSQL();
     const rows = await sql`
-      SELECT target_name, COUNT(*) as count
+      SELECT
+        LOWER(target_name) as name_key,
+        MAX(target_name) as display_name,
+        COUNT(*)::int as curse_count
       FROM curses
-      GROUP BY target_name
-      ORDER BY count DESC
+      GROUP BY LOWER(target_name)
+      ORDER BY curse_count DESC
       LIMIT ${limit}
     `;
     return rows.map((r) => ({
-      name: r.target_name as string,
-      count: Number(r.count),
+      name: String(r.display_name),
+      count: Number(r.curse_count),
     }));
   },
 };
