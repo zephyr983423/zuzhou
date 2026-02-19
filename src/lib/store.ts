@@ -146,6 +146,7 @@ const memStore = {
 };
 
 // Select store based on environment
+console.log("[store] DATABASE_URL configured:", isNeonConfigured);
 const store = isNeonConfigured ? neonStore : memStore;
 
 export const addCurse = store.addCurse;
