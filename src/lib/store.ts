@@ -83,22 +83,8 @@ const neonStore = {
     }));
   },
   async getLeaderboard(limit: number = 20): Promise<LeaderboardEntry[]> {
-    await ensureTable();
-    const sql = getSQL();
-    const rows = await sql`
-      SELECT
-        LOWER(target_name) as name_key,
-        MAX(target_name) as display_name,
-        COUNT(*)::int as curse_count
-      FROM curses
-      GROUP BY LOWER(target_name)
-      ORDER BY curse_count DESC
-      LIMIT ${limit}
-    `;
-    return rows.map((r) => ({
-      name: String(r.display_name),
-      count: Number(r.curse_count),
-    }));
+    const allCurses = await neonStore.getRecentCurses(10000);
+    return computeLeaderboard(allCurses, limit);
   },
 };
 
@@ -146,7 +132,6 @@ const memStore = {
 };
 
 // Select store based on environment
-console.log("[store] DATABASE_URL configured:", isNeonConfigured);
 const store = isNeonConfigured ? neonStore : memStore;
 
 export const addCurse = store.addCurse;

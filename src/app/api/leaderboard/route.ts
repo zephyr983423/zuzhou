@@ -6,12 +6,11 @@ export const dynamic = "force-dynamic";
 export async function GET() {
   try {
     const leaderboard = await getLeaderboard();
-    console.log("[leaderboard] result:", JSON.stringify(leaderboard));
     return NextResponse.json({ leaderboard });
   } catch (error) {
-    console.error("[leaderboard] error:", error);
+    console.error("Failed to fetch leaderboard:", error);
     return NextResponse.json(
-      { error: String(error) },
+      { error: "Erreur du serveur" },
       { status: 500 }
     );
   }
